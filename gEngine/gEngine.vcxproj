@@ -69,14 +69,23 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(SolutionDir)bin\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)bin\$(Configuration)\intermediates\</IntDir>
+    <IncludePath>$(SolutionDir)dependencies\GLEW\include;$(SolutionDir)dependencies\GLFW\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)dependencies\GLFW\lib-vc2015;$(SolutionDir)dependencies\GLEW\lib;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <PreprocessorDefinitions>GLEW_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
+    <Link>
+      <AdditionalDependencies>glew32s.lib;opengl32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -115,6 +124,74 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="buffers\element_buffer.cpp" />
+    <ClCompile Include="buffers\vertex_array.cpp" />
+    <ClCompile Include="buffers\vertex_buffer.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="maths\mat4.cpp" />
+    <ClCompile Include="maths\maths_algorithm.cpp" />
+    <ClCompile Include="maths\vec2.cpp" />
+    <ClCompile Include="maths\vec3.cpp" />
+    <ClCompile Include="maths\vec4.cpp" />
+    <ClCompile Include="physical\collisionDetection\collisionDetection.cpp" />
+    <ClCompile Include="physical\world\world.cpp" />
+    <ClCompile Include="renderer\drawLine.cpp" />
+    <ClCompile Include="renderer\simple_renderer2d.cpp" />
+    <ClCompile Include="resourceManagement\resourceManagement.cpp" />
+    <ClCompile Include="sprite\circleSprite.cpp" />
+    <ClCompile Include="sprite\sprite2d.cpp" />
+    <ClCompile Include="texture\stb_image.cpp" />
+    <ClCompile Include="texture\texture2d.cpp" />
+    <ClCompile Include="tool\shader.cpp" />
+    <ClCompile Include="window\input.cpp" />
+    <ClCompile Include="window\window.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="buffers\buffers.h" />
+    <ClInclude Include="buffers\buffer_layout.h" />
+    <ClInclude Include="buffers\element_buffer.h" />
+    <ClInclude Include="buffers\vertex_array.h" />
+    <ClInclude Include="buffers\vertex_buffer.h" />
+    <ClInclude Include="maths\mat4.h" />
+    <ClInclude Include="maths\maths.h" />
+    <ClInclude Include="maths\maths_algorithm.h" />
+    <ClInclude Include="maths\vec2.h" />
+    <ClInclude Include="maths\vec3.h" />
+    <ClInclude Include="maths\vec4.h" />
+    <ClInclude Include="physical\collisionDetection\collisionDetection.h" />
+    <ClInclude Include="physical\collisionHanding\collisionHanding.h" />
+    <ClInclude Include="physical\model\basicModel.h" />
+    <ClInclude Include="physical\model\circleModel.h" />
+    <ClInclude Include="physical\world\world.h" />
+    <ClInclude Include="renderer\drawLine.h" />
+    <ClInclude Include="renderer\simple_renderer2d.h" />
+    <ClInclude Include="resourceManagement\resourceManagement.h" />
+    <ClInclude Include="sprite\circleSprite.h" />
+    <ClInclude Include="sprite\sprite.h" />
+    <ClInclude Include="sprite\sprite2d.h" />
+    <ClInclude Include="texture\stb_image.h" />
+    <ClInclude Include="texture\texture2d.h" />
+    <ClInclude Include="tool\read_file.h" />
+    <ClInclude Include="tool\shader.h" />
+    <ClInclude Include="tool\tool_macro.h" />
+    <ClInclude Include="window\input.h" />
+    <ClInclude Include="window\window.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Textures\circle.png" />
+    <Image Include="Textures\diffuse.png" />
+    <Image Include="Textures\messi.png" />
+    <Image Include="Textures\rectangular.png" />
+    <Image Include="Textures\rectangular_test.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="shaders\basic.frag" />
+    <None Include="shaders\basic.vert" />
+    <None Include="shaders\line.frag" />
+    <None Include="shaders\line.geom" />
+    <None Include="shaders\line.vert" />
+    <None Include="shaders\texture2d.frag" />
+    <None Include="shaders\texture2d.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

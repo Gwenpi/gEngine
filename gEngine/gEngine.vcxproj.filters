@@ -14,4 +14,184 @@
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="window\input.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="window\window.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="tool\shader.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="texture\stb_image.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="texture\texture2d.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="sprite\circleSprite.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="sprite\sprite2d.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="resourceManagement\resourceManagement.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\drawLine.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer\simple_renderer2d.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="physical\world\world.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="physical\collisionDetection\collisionDetection.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="maths\mat4.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="maths\maths_algorithm.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="maths\vec2.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="maths\vec3.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="maths\vec4.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="buffers\element_buffer.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="buffers\vertex_array.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="buffers\vertex_buffer.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="window\window.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="window\input.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="tool\read_file.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="tool\shader.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="tool\tool_macro.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="texture\stb_image.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="texture\texture2d.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="sprite\circleSprite.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="sprite\sprite.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="sprite\sprite2d.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="resourceManagement\resourceManagement.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="renderer\drawLine.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="renderer\simple_renderer2d.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="physical\world\world.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="physical\model\basicModel.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="physical\model\circleModel.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="physical\collisionHanding\collisionHanding.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="physical\collisionDetection\collisionDetection.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="maths\mat4.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="maths\maths.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="maths\maths_algorithm.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="maths\vec2.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="maths\vec3.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="maths\vec4.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="buffers\buffer_layout.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="buffers\buffers.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="buffers\element_buffer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="buffers\vertex_array.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="buffers\vertex_buffer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Textures\circle.png">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Textures\diffuse.png">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Textures\messi.png">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Textures\rectangular.png">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Textures\rectangular_test.png">
+      <Filter>资源文件</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="shaders\basic.frag" />
+    <None Include="shaders\basic.vert" />
+    <None Include="shaders\line.frag" />
+    <None Include="shaders\line.geom" />
+    <None Include="shaders\line.vert" />
+    <None Include="shaders\texture2d.frag" />
+    <None Include="shaders\texture2d.vert" />
+  </ItemGroup>
 </Project>
