@@ -3,6 +3,7 @@
 #include<GLFW\glfw3.h>
 
 World::World()
+	:m_MaxSimulationSteps(15), m_SimulationUpdate(4)
 {
 	init();
 }
@@ -32,10 +33,10 @@ void World::update(float duration)
 		return fabs((x1 - px)*(x1 - px) + (y1 - py)*(y1 - py)) < (r1 * r1);
 	};
 
-	float cursorY= SCREEN_HEIGHT - Input::getCursorY();
-	float cursorX= Input::getCursorX();
+	float cursorY = SCREEN_HEIGHT - Input::getCursorY();
+	float cursorX = Input::getCursorX();
 
-	if (Input::mouseButtonIsPress(GLFW_MOUSE_BUTTON_LEFT)||Input::mouseButtonIsPress(GLFW_MOUSE_BUTTON_RIGHT))
+	if (Input::mouseButtonIsPress(GLFW_MOUSE_BUTTON_LEFT) || Input::mouseButtonIsPress(GLFW_MOUSE_BUTTON_RIGHT))
 	{
 		if (Input::getSpriteSelete() == nullptr)
 		{
@@ -53,7 +54,7 @@ void World::update(float duration)
 	}
 	if (Input::getSpriteSelete() != nullptr)
 	{
-		if(Input::mouseButtonIsHeld(GLFW_MOUSE_BUTTON_LEFT))
+		if (Input::mouseButtonIsHeld(GLFW_MOUSE_BUTTON_LEFT))
 			Input::getSpriteSelete()->changePosition(cursorX, cursorY);
 		else if (Input::mouseButtonIsRelease(GLFW_MOUSE_BUTTON_LEFT))
 		{
@@ -64,40 +65,79 @@ void World::update(float duration)
 			}
 		}
 	}
-	
-	
-	
+
+
+
 
 	//draw cue
 	if (Input::getSpriteSelete() != nullptr)
 	{
-		m_Line->drawLine(Input::getSpriteSelete()->getPosition(), vec2(cursorX, cursorY),vec4(0.1,0.1,1.0,1.0));
+		m_Line->drawLine(Input::getSpriteSelete()->getPosition(), vec2(cursorX, cursorY), vec4(0.1, 0.1, 1.0, 1.0));
 	}
 
-	//圆的碰撞检测
-	for (auto &ball : m_Sprites)
-	{
-		for (auto &target : m_Sprites)
-		{
-			if (target != ball)
-			{
-				if (ball->collisionHanding(target))
-				{
-					m_Line->drawLine(ball->getPosition(), target->getPosition(),vec4(0.8, 0.1, 0.1, 0.5));
-				}
-			}
-		}
-	}
 	//圆的更新
-	for (auto &ball : m_Sprites)
+
+	float simDuration = duration / (float)m_SimulationUpdate;
+
+	for (int i = 0;i < m_SimulationUpdate;i++)
 	{
-		ball->update(duration);
-		friction(ball);
+		for (auto &ball : m_Sprites)
+			ball->changeSimTimeRemaining() = simDuration;
+
+		for (int j = 0;j < m_MaxSimulationSteps;j++)
+		{
+			for (auto &ball : m_Sprites)
+			{
+				if (ball->getSimTimeRemaining() > 0.0f)
+				{
+					ball->update(ball->getSimTimeRemaining());
+					friction(ball);
+				}
+
+
+			}
+
+			//圆的碰撞检测
+			for (auto &ball : m_Sprites)
+			{
+				for (auto &target : m_Sprites)
+				{
+					if (target != ball)
+					{
+						if (ball->collisionDeetection(target))
+						{
+							m_Line->drawLine(ball->getPosition(), target->getPosition(), vec4(0.8, 0.1, 0.1, 0.5));
+							ball->staticCollision(target);
+							m_CollisionPairs.push_back({ ball,target });
+						}
+					}
+				}
+
+				float intendedSpeed = sqrtf(ball->getVelocity().mx*ball->getVelocity().mx + ball->getVelocity().my*ball->getVelocity().my);
+				float intendedDistance = intendedSpeed * ball->getSimTimeRemaining();
+				float actualDistance = sqrtf((ball->getPosition().mx - ball->getOldPosition().mx)*(ball->getPosition().mx - ball->getOldPosition().mx)
+					+ (ball->getPosition().my - ball->getOldPosition().my)*(ball->getPosition().my - ball->getOldPosition().my));
+				float actualTime = actualDistance / intendedSpeed;
+
+
+				if (intendedDistance == 0)//说明速度为零,模拟时间为零
+					ball->changeSimTimeRemaining() = 0.0f;
+				else
+				{
+					ball->changeSimTimeRemaining() -= actualTime;
+				}
+
+			}
+			for (auto c : m_CollisionPairs)
+			{
+				c.first->dynamicCollision(c.second);
+			}
+			m_CollisionPairs.clear();
+		}
+
 	}
-
-
-
 	interfaceCycle();
+
 }
 
 void World::render()
@@ -115,12 +155,13 @@ void World::init()
 
 	addCircleSprite(vec2(0.0f), 25.0f);
 	addCircleSprite(vec2(150.0f), 25.0f);
-	addCircleSprite(vec2(200.0f), 25.0f);
-	addCircleSprite(vec2(250.0f), 25.0f);
-	addCircleSprite(vec2(280.0f,100.0f), 25.0f);
-	addCircleSprite(vec2(310.0f), 25.0f);
-	addCircleSprite(vec2(340.0f), 25.0f);
-	addCircleSprite(vec2(370.0f), 25.0f);
+
+	addCircleSprite(vec2(200.0f), 10.0f);
+	addCircleSprite(vec2(250.0f), 10.0f);
+
+	addCircleSprite(vec2(310.0f), 30.0f);
+
+	addCircleSprite(vec2(370.0f), 10.0f);
 }
 
 void World::interfaceCycle()
@@ -128,7 +169,7 @@ void World::interfaceCycle()
 	for (auto &sprite : m_Sprites)
 	{
 		if (sprite->getPosition().mx < 0)sprite->changePosition().mx += SCREEN_WIDTH;
-		if (sprite->getPosition().mx >=SCREEN_WIDTH)sprite->changePosition().mx -= SCREEN_WIDTH;
+		if (sprite->getPosition().mx >= SCREEN_WIDTH)sprite->changePosition().mx -= SCREEN_WIDTH;
 
 
 		if (sprite->getPosition().my < 0)sprite->changePosition().my += SCREEN_HEIGHT;

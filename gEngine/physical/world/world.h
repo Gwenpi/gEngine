@@ -11,10 +11,13 @@ private:
 	std::vector<Sprite2D*>m_Sprites;
 	SimpleRenderer2D* m_Renderer;
 	DrawLine* m_Line;
+	int m_SimulationUpdate;
+	int m_MaxSimulationSteps;
+	std::vector<std::pair<Sprite2D*, Sprite2D*>>m_CollisionPairs; //¶¯Ì¬Åö×²¶Ô
 public:
 	World();
 	~World();
-	void addCircleSprite(const vec2& position, float radius=20.0f, const char* textueName="circle");
+	void addCircleSprite(const vec2& position, float radius = 20.0f, const char* textueName = "circle");
 	void update(float duration);
 	void render();
 private:

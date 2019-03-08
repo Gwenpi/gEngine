@@ -30,7 +30,6 @@ int main()
 {
 	Window window(SCREEN_WIDTH, SCREEN_HEIGHT, "gEngine");
 
-	glewInit();
 
 	ResourceManagement::init();
 	Input::init();
