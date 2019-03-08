@@ -24,5 +24,3 @@ These things, just simple imitation of what technical content
 
 Of course, I will gradually improve it in the future.
 
-这个东西我上传了两次，第一次莫名奇妙的吧.vs上传上来，我看了看这个文件有一个G。
-这次没有了。不过我是真的不懂github该怎么用.......       ------2019.3.7
